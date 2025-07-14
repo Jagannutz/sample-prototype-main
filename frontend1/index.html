@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Store 1</title>
+</head>
+<body>
+  <h1>Welcome to Store 1</h1>
+  <div id="products">Loading products...</div>
+
+  <script>
+    fetch('http://store1.localhost:3000/products')
+      .then(res => res.json())
+      .then(data => {
+        const div = document.getElementById('products');
+        div.innerHTML = data.map(p => `<p>${p.name} - ₹${p.price}</p>`).join('');
+      })
+      .catch(err => {
+        console.error('❌ Error loading products:', err);
+        document.getElementById('products').textContent = 'Error loading products';
+      });
+  </script>
+</body>
+</html>
